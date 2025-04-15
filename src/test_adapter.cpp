@@ -118,12 +118,14 @@ int io_error() {
 
 int serialize() {
     ensure_globals();
+    sync_to_path_manager();
     transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
     return serializer.serialize();
 }
 
 int deserialize() {
     ensure_globals();
+    sync_to_path_manager();
     bool clobber = (g_global_options & 0x8) != 0;
     transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
     return deserializer.deserialize();
