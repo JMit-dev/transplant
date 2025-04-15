@@ -7,7 +7,7 @@ int PathManager::init(const char* name) {
     m_path_length = 0;
 
     while (*name != '\0') {
-        if (m_path_length > PATH_MAX - 1) {
+        if (m_path_length >= PATH_MAX - 1) {
             return -1;
         }
         *(m_path_buf + m_path_length) = *name;
