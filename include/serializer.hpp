@@ -15,13 +15,13 @@ public:
     // Serialize entire tree
     int serialize();
 
-private:
     // Serialize directory contents
     int serialize_directory(int depth);
 
     // Serialize single file
     int serialize_file(int depth, off_t size);
 
+private:
     PathManager& m_path_manager;
     BinaryIO& m_io;
 };

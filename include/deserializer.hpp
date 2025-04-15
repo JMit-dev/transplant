@@ -15,13 +15,13 @@ public:
     // Deserialize entire tree
     int deserialize();
 
-private:
     // Deserialize directory contents
     int deserialize_directory(int depth);
 
     // Deserialize single file
     int deserialize_file(int depth);
 
+private:
     PathManager& m_path_manager;
     BinaryIO& m_io;
     bool m_clobber;

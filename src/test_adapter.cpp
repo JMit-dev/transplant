@@ -24,6 +24,13 @@ static void ensure_globals() {
     }
 }
 
+// Sync from global variables to PathManager (when tests set g_path_buf directly)
+static void sync_to_path_manager() {
+    if (g_test_path_manager && g_path_length > 0) {
+        g_test_path_manager->init(g_path_buf);
+    }
+}
+
 extern "C" {
 
 int path_init(char* name) {
@@ -124,28 +131,32 @@ int deserialize() {
 
 int serialize_directory(int depth) {
     ensure_globals();
+    sync_to_path_manager();
     transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
-    return serializer.serialize();  // Note: Can't call private method, so call main serialize
+    return serializer.serialize_directory(depth);
 }
 
 int deserialize_directory(int depth) {
     ensure_globals();
+    sync_to_path_manager();
     bool clobber = (g_global_options & 0x8) != 0;
     transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
-    return deserializer.deserialize();  // Note: Can't call private method, so call main deserialize
+    return deserializer.deserialize_directory(depth);
 }
 
 int serialize_file(int depth, off_t size) {
     ensure_globals();
+    sync_to_path_manager();
     transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
-    return serializer.serialize();  // Note: Can't call private method, so call main serialize
+    return serializer.serialize_file(depth, size);
 }
 
 int deserialize_file(int depth) {
     ensure_globals();
+    sync_to_path_manager();
     bool clobber = (g_global_options & 0x8) != 0;
     transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
-    return deserializer.deserialize();  // Note: Can't call private method, so call main deserialize
+    return deserializer.deserialize_file(depth);
 }
 
 }
