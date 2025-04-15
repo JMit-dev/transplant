@@ -29,12 +29,14 @@ int CommandLineParser::parse(int argc, char** argv, ProgramOptions& options) {
     options.path = nullptr;
 
     if (argc < 2) {
+        options.flags = 0;
         return -1;
     }
 
     char** args = argv + 1;
 
     if (**args != '-') {
+        options.flags = 0;
         return -1;
     }
 
@@ -51,6 +53,7 @@ int CommandLineParser::parse(int argc, char** argv, ProgramOptions& options) {
         options.flags |= 0x4;
         d_flag = true;
     } else {
+        options.flags = 0;
         return -1;
     }
 
@@ -60,23 +63,27 @@ int CommandLineParser::parse(int argc, char** argv, ProgramOptions& options) {
     args++;
     while (*args) {
         if (**args != '-') {
+            options.flags = 0;
             return -1;
         }
 
         if (*(*args + 1) == 'c' && !c_flag) {
             c_flag = true;
             if (!d_flag) {
+                options.flags = 0;
                 return -1;
             }
             options.flags |= 0x8;
         } else if (*(*args + 1) == 'p' && !p_flag) {
             p_flag = true;
             args++;
-            if (!*args || **args == '-') {
+            if (!*args) {
+                options.flags = 0;
                 return -1;
             }
             options.path = *args;
         } else {
+            options.flags = 0;
             return -1;
         }
         args++;
