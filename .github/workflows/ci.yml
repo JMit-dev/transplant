@@ -13,11 +13,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: Install build dependencies
       run: |
-        sudo add-apt-repository ppa:snaipewastaken/ppa -y
         sudo apt-get update
-        sudo apt-get install -y cmake build-essential criterion-dev
+        sudo apt-get install -y cmake build-essential meson ninja-build libffi-dev
+
+    - name: Build and install Criterion
+      run: |
+        git clone --depth 1 --branch v2.4.2 https://github.com/Snaipe/Criterion.git
+        cd Criterion
+        meson setup build
+        meson compile -C build
+        sudo meson install -C build
+        sudo ldconfig
 
     - name: Configure CMake
       run: cmake -B build
