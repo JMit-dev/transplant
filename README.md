@@ -13,26 +13,26 @@ A C++ utility for serializing and deserializing directory trees with file metada
 ## Building
 
 ```bash
-mkdir build
-cd build
-cmake ..
-make
+cmake -B build
+cmake --build build
 ```
+
+The compiled binary will be in `build/transplant`.
 
 ## Usage
 
 ```bash
 # Serialize a directory
-./transplant -s -p /path/to/directory > output.bin
+build/transplant -s -p /path/to/directory > output.bin
 
 # Deserialize to a directory
-./transplant -d -p /path/to/output < output.bin
+build/transplant -d -p /path/to/output < output.bin
 
 # Deserialize with clobber (overwrite existing files)
-./transplant -d -c -p /path/to/output < output.bin
+build/transplant -d -c -p /path/to/output < output.bin
 
 # Show help
-./transplant -h
+build/transplant -h
 ```
 
 ## Architecture
@@ -47,13 +47,19 @@ The project follows modern C++ design principles with clear separation of concer
 
 ## Testing
 
-Tests use the Criterion framework:
+Tests use the Criterion framework. All 39 active unit tests pass:
 
 ```bash
-cd build
-make transplant_tests
-./transplant_tests
+cmake --build build
+build/transplant_tests
 ```
+
+Test coverage includes:
+- Command line argument validation (13 tests)
+- Path buffer operations (7 tests)
+- File serialization (7 tests)
+- File deserialization (8 tests)
+- Directory operations (4 tests)
 
 ## Requirements
 
