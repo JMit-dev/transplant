@@ -1,5 +1,9 @@
 # Transplant
 
+[![CI](https://github.com/USERNAME/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USERNAME/REPO/actions/workflows/ci.yml)
+[![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 A C++ utility for serializing and deserializing directory trees with file metadata preservation.
 
 ## Features

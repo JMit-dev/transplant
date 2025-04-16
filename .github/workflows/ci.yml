@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo add-apt-repository ppa:snaipewastaken/ppa -y
+        sudo apt-get update
+        sudo apt-get install -y cmake build-essential criterion-dev
+
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run tests
+      run: build/transplant_tests --verbose
