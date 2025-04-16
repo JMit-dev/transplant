@@ -34,4 +34,4 @@ jobs:
       run: cmake --build build
 
     - name: Run tests
-      run: build/transplant_tests --verbose
+      run: cd build && ctest --output-on-failure --verbose
