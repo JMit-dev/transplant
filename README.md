@@ -1,6 +1,6 @@
 # Transplant
 
-[![CI](https://github.com/USERNAME/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USERNAME/REPO/actions/workflows/ci.yml)
+[![CI](https://github.com/JMit-dev/transplant/actions/workflows/ci.yml/badge.svg)](https://github.com/JMit-dev/transplant/actions/workflows/ci.yml)
 [![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
