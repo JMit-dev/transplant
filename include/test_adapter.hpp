@@ -29,6 +29,14 @@ void write_header(std::FILE* out, uint8_t type, uint32_t depth, uint64_t size);
 int read_header(std::FILE* in, transplant::RecordHeader* header);
 int io_error();
 
+// Serialize/Deserialize functions
+int serialize();
+int deserialize();
+int serialize_directory(int depth);
+int deserialize_directory(int depth);
+int serialize_file(int depth, off_t size);
+int deserialize_file(int depth);
+
 }
 
 // Global variables for test compatibility
@@ -36,5 +44,11 @@ extern int g_global_options;
 extern char g_name_buf[NAME_MAX];
 extern char g_path_buf[PATH_MAX];
 extern int g_path_length;
+
+// Compatibility aliases for old names
+#define global_options g_global_options
+#define name_buf g_name_buf
+#define path_buf g_path_buf
+#define path_length g_path_length
 
 #endif

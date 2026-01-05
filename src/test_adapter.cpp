@@ -1,4 +1,6 @@
 #include "test_adapter.hpp"
+#include "serializer.hpp"
+#include "deserializer.hpp"
 #include <cstring>
 
 // Global instances
@@ -105,6 +107,45 @@ int read_header(std::FILE* in, transplant::RecordHeader* header) {
 int io_error() {
     ensure_globals();
     return g_test_io->has_error() ? 1 : 0;
+}
+
+int serialize() {
+    ensure_globals();
+    transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
+    return serializer.serialize();
+}
+
+int deserialize() {
+    ensure_globals();
+    bool clobber = (g_global_options & 0x8) != 0;
+    transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
+    return deserializer.deserialize();
+}
+
+int serialize_directory(int depth) {
+    ensure_globals();
+    transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
+    return serializer.serialize();  // Note: Can't call private method, so call main serialize
+}
+
+int deserialize_directory(int depth) {
+    ensure_globals();
+    bool clobber = (g_global_options & 0x8) != 0;
+    transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
+    return deserializer.deserialize();  // Note: Can't call private method, so call main deserialize
+}
+
+int serialize_file(int depth, off_t size) {
+    ensure_globals();
+    transplant::Serializer serializer(*g_test_path_manager, *g_test_io);
+    return serializer.serialize();  // Note: Can't call private method, so call main serialize
+}
+
+int deserialize_file(int depth) {
+    ensure_globals();
+    bool clobber = (g_global_options & 0x8) != 0;
+    transplant::Deserializer deserializer(*g_test_path_manager, *g_test_io, clobber);
+    return deserializer.deserialize();  // Note: Can't call private method, so call main deserialize
 }
 
 }

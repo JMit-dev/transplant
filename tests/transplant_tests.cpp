@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <criterion/criterion.h>

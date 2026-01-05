@@ -11,10 +11,10 @@
 
 constexpr int TEST_TIMEOUT = 15;
 
-constexpr const char* TEST_RSRC_DIR = "tests/rsrc";
-constexpr const char* TEST_OUTPUT_DIR = "test_output";
-constexpr const char* REF_BIN_DIR = "tests/rsrc/bin";
-constexpr const char* STANDARD_LIMITS = "ulimit -t 10; ulimit -f 2000;";
+#define TEST_RSRC_DIR "tests/rsrc"
+#define TEST_OUTPUT_DIR "test_output"
+#define REF_BIN_DIR "tests/rsrc/bin"
+#define STANDARD_LIMITS "ulimit -t 10; ulimit -f 2000;"
 
 #define QUOTE1(x) #x
 #define QUOTE(x) QUOTE1(x)
